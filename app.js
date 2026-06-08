@@ -42,44 +42,48 @@ function renderExercises() {
     const searchTerm = searchInput.value.toLowerCase();
 
     allExercises.forEach((ex, index) => {
-        // Om vi INTE redigerar, visa bara de som är valda (visible)
         if (!isEditing && !ex.visible) return;
-
-        // Filtrera på sökord
         if (searchTerm && !ex.title.toLowerCase().includes(searchTerm)) return;
 
         const card = document.createElement('div');
         card.className = `exercise-card ${isEditing ? 'editing' : ''} ${ex.visible ? 'selected' : ''}`;
 
+        // HÄR ÄR NYTT: Gör kortet dragbart ENBART om vi är i redigeringsläge
+        if (isEditing) {
+            card.setAttribute('draggable', 'true');
+            card.setAttribute('data-index', index);
+        }
+
         card.innerHTML = `
-    <div class="exercise-main-row">
-        <div class="checkbox-container">
-            <input type="checkbox" ${ex.visible ? 'checked' : ''} data-index="${index}" class="status-checkbox">
-        </div>
-        <img src="${ex.image || 'https://via.placeholder.com/80'}" alt="${ex.title}" class="exercise-img">
-        
-        <div class="exercise-info">
-            <div class="exercise-title">${ex.title}</div>
-            
-            <div class="weight-container">
-                Vikt: 
-                <span class="weight-badge" data-index="${index}">${ex.weight} kg</span>
+            <div class="exercise-main-row">
+                ${isEditing ? '<div class="drag-handle"><i class="mdi mdi-drag-vertical"></i></div>' : ''}
+                <div class="checkbox-container">
+                    <input type="checkbox" ${ex.visible ? 'checked' : ''} data-index="${index}" class="status-checkbox">
+                </div>
+                <img src="${ex.image || 'https://via.placeholder.com/80'}" alt="${ex.title}" class="exercise-img">
+                
+                <div class="exercise-info">
+                    <div class="exercise-title">${ex.title}</div>
+                    
+                    <div class="weight-container">
+                        Vikt: 
+                        <span class="weight-badge" data-index="${index}">${ex.weight} kg</span>
+                    </div>
+
+                    <div class="toggle-instructions" data-index="${index}">
+                        <span>Visa instruktioner</span>
+                        <svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
             </div>
 
-            <div class="toggle-instructions" data-index="${index}">
-                <span>Visa instruktioner</span>
-                <svg class="chevron-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
+            <div class="instructions-text" id="inst-${index}">
+                <strong>Instruktioner</strong>
+                <p>${ex.instructions || 'Inga instruktioner tillgängliga.'}</p>
             </div>
-        </div>
-    </div>
-
-    <div class="instructions-text" id="inst-${index}">
-        <strong>Instruktioner</strong>
-        <p>${ex.instructions || 'Inga instruktioner tillgängliga.'}</p>
-    </div>
-`;
+        `;
 
         // Event: Klicka på vikten för att redigera
         const weightBadge = card.querySelector('.weight-badge');
@@ -94,43 +98,166 @@ function renderExercises() {
                 const text = card.querySelector('.instructions-text');
                 const icon = card.querySelector('.chevron-icon');
                 const span = toggleBtn.querySelector('span');
-
                 text.classList.toggle('open');
                 icon.classList.toggle('rotate');
-
                 span.textContent = text.classList.contains('open') ? 'Dölj instruktioner' : 'Visa instruktioner';
             });
         }
-        // Event: Klicka på hela kortet i redigeringsläge
-        card.addEventListener('click', (e) => {
-            // Om vi INTE är i redigeringsläge, gör ingenting och låt vanliga klick fungera
-            if (!isEditing) return;
 
-            // Säkra att vi inte triggar detta om användaren klickar på vikt-inputen eller instruktionerna
+        // Event: Klicka på hela kortet i redigeringsläge (justerad för att inte krocka med drag-handtaget)
+        card.addEventListener('click', (e) => {
+            if (!isEditing) return;
             if (
                 e.target.closest('.weight-container') ||
                 e.target.closest('.toggle-instructions') ||
                 e.target.closest('.instructions-text') ||
+                e.target.closest('.drag-handle') || // NYTT: Klicka på drag-handtaget ska inte toggla checkboxen
                 e.target.className === 'weight-input'
             ) {
                 return;
             }
 
-            // Hämta kryssrutan inuti detta kort
             const checkbox = card.querySelector('.status-checkbox');
             if (checkbox) {
-                // Växla värdet (om den var ikryssad blir den urkryssad, och tvärtom)
                 checkbox.checked = !checkbox.checked;
-
-                // Uppdatera vårt lokala state direkt så att det sparas rätt sen
                 allExercises[index].visible = checkbox.checked;
-
-                // Växla den blåa ramen på kortet direkt i gränssnittet för skön visuell feedback
                 card.classList.toggle('selected', checkbox.checked);
             }
         });
 
+        // HÄR ÄR NYTT: Lägg till drag-events på kortet
+        if (isEditing) {
+            setupDragAndDropEvents(card);
+        }
+
         exerciseListEl.appendChild(card);
+    });
+}
+
+// Helt ny funktion för att hantera själva flytt-logiken
+function setupDragAndDropEvents(card) {
+    const dragHandle = card.querySelector('.drag-handle');
+    if (!dragHandle) return;
+
+    let startY = 0;
+    let currentTranslateY = 0;
+    let initialIndex = 0;
+    let currentIndex = 0;
+    let cardHeight = 0;
+    let allCards = [];
+
+    dragHandle.addEventListener('touchstart', (e) => {
+        if (!isEditing) return;
+
+        const touch = e.touches[0];
+        startY = touch.clientY;
+        currentTranslateY = 0;
+
+        // Sätt kortet i "svävande" läge
+        card.classList.add('dragging');
+
+        // Hämta en färsk lista på alla kort och ta reda på var vi startar
+        allCards = Array.from(exerciseListEl.querySelectorAll('.exercise-card'));
+        initialIndex = allCards.indexOf(card);
+        currentIndex = initialIndex;
+
+        // Räkna ut höjden på kortet inklusive gapet (marginalen) till nästa kort
+        cardHeight = card.offsetHeight + 12; // 12px är gapet i din .exercise-list
+    }, { passive: true });
+
+    dragHandle.addEventListener('touchmove', (e) => {
+        if (!isEditing) return;
+        if (e.cancelable) e.preventDefault(); // Stoppa mobilens skroll
+
+        const touch = e.touches[0];
+        currentTranslateY = touch.clientY - startY;
+
+        // Flytta det upplyfta kortet i realtid efter tummen
+        card.style.transform = `translateY(${currentTranslateY}px)`;
+
+        // Räkna ut hur många positioner upp eller ner vi har flyttat fingret
+        // Genom att lägga till (cardHeight / 2) reagerar listan precis när vi passerat halvvägs över ett annat kort!
+        const direction = currentTranslateY > 0 ? 1 : -1;
+        const positionsMoved = Math.round(currentTranslateY / cardHeight);
+        const targetIndex = initialIndex + positionsMoved;
+
+        // Håll målet inom listans gränser
+        const boundedTargetIndex = Math.max(0, Math.min(allCards.length - 1, targetIndex));
+
+        if (boundedTargetIndex !== currentIndex) {
+            currentIndex = boundedTargetIndex;
+        }
+
+        // Animera de ANDRA korten för att göra plats
+        allCards.forEach((otherCard, idx) => {
+            if (otherCard === card) return; // Hoppa över kortet vi håller i
+
+            // Om vi drar NEDÅT och detta kort ligger mellan startpositionen och där vi är nu:
+            // Animera detta kort UPPÅT för att ge plats under
+            if (idx > initialIndex && idx <= currentIndex) {
+                otherCard.style.transform = `translateY(${-cardHeight}px)`;
+            }
+            // Om vi drar UPPÅT och detta kort ligger mellan startpositionen och där vi är nu:
+            // Animera detta kort NEDÅT för att ge plats över
+            else if (idx < initialIndex && idx >= currentIndex) {
+                otherCard.style.transform = `translateY(${cardHeight}px)`;
+            }
+            // Annars ska kortet ligga kvar på sin vanliga plats
+            else {
+                otherCard.style.transform = '';
+            }
+        });
+    }, { passive: false });
+
+    dragHandle.addEventListener('touchend', () => {
+        if (!isEditing) return;
+
+        // Avsluta det svävande läget
+        card.classList.remove('dragging');
+        card.style.transform = '';
+
+        // Återställ animationstexten på alla andra kort
+        allCards.forEach(otherCard => {
+            otherCard.style.transform = '';
+        });
+
+        // Flytta kortet permanent i DOM-trädet till sin nya position
+        if (currentIndex !== initialIndex) {
+            const referenceCard = allCards[currentIndex];
+            if (currentIndex > initialIndex) {
+                // Om vi flyttat ner, lägg kortet efter målkortet
+                exerciseListEl.insertBefore(card, referenceCard.nextSibling);
+            } else {
+                // Om vi flyttat upp, lägg kortet före målkortet
+                exerciseListEl.insertBefore(card, referenceCard);
+            }
+        }
+
+        // Spara den nya ordningen i din array för Firebase
+        reorderExercisesArray();
+    });
+}
+
+// Hjälpfunktion som läser av den nya ordningen i DOM:en och sparar om i allExercises-arrayen
+function reorderExercisesArray() {
+    const currentCards = Array.from(exerciseListEl.querySelectorAll('.exercise-card'));
+    const newOrderedExercises = [];
+
+    currentCards.forEach(card => {
+        const origIndex = parseInt(card.getAttribute('data-index'));
+        if (!isNaN(origIndex)) {
+            newOrderedExercises.push(allExercises[origIndex]);
+        }
+    });
+
+    // Spara den nya ordningen i vår lokala array (Firebase sparar detta sen när man trycker på "Klar")
+    allExercises = newOrderedExercises;
+
+    // Uppdatera data-attributen i DOM:en utan att rendera om (vilket skulle avbryta draget)
+    currentCards.forEach((card, newIdx) => {
+        card.setAttribute('data-index', newIdx);
+        const cb = card.querySelector('.status-checkbox');
+        if (cb) cb.setAttribute('data-index', newIdx);
     });
 }
 

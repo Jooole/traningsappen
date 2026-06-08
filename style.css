@@ -18,7 +18,7 @@ body {
     background-color: var(--bg-gray);
     color: var(--text-dark);
     /* Ändra från padding-bottom till dessa tre rader: */
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -134,7 +134,7 @@ h1 {
 
 /* Övningslista & Kort */
 .exercise-list {
-    padding: 0 16px 20px 16px;
+    padding: 0 16px 48px 16px;
     /* 20px extra padding i botten för snyggt avslut */
     display: flex;
     flex-direction: column;
@@ -154,10 +154,10 @@ h1 {
     padding: 16px;
     display: flex;
     flex-wrap: wrap;
-    /* Låter .instructions-text hamna underst */
     border: 1px solid var(--border-gray);
     position: relative;
-    /* Ta bort gap och align-items härifrån då det styrs på raden istället */
+    /* NYTT: Den här gör att korten glider isär med en snygg animation */
+    transition: transform 0.2s cubic-bezier(0.2, 0, 0.2, 1), border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .exercise-main-row {
@@ -295,6 +295,19 @@ h1 {
 .exercise-card.editing {
     cursor: pointer;
     transition: transform 0.1s ease, border-color 0.15s ease;
+
+    /* NYTT: Förhindrar textmarkering på mobilen */
+    -webkit-user-select: none;
+    /* Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE10+ */
+    user-select: none;
+    /* Standard */
+
+    /* Förhindrar även att mobilen öppnar en "förhandsvisnings-bubbla" på bilden */
+    -webkit-touch-callout: none;
 }
 
 .exercise-card.editing:active {
@@ -328,7 +341,6 @@ h1 {
     background: white;
     border-top: 1px solid var(--border-gray);
     display: flex;
-    justify-space: around;
     align-items: center;
     flex-shrink: 0;
     /* CRITICAL: Hindrar footern från att tryckas ihop */
@@ -371,4 +383,83 @@ h1 {
 /* Gör att ikonen blir blå när fliken är aktiv */
 .nav-item.active .nav-icon-font {
     color: var(--primary-blue);
+}
+
+/* Drag-handtag (Visas bara i edit-läge) */
+.drag-handle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 24px;
+    padding: 10px 12px 10px 0;
+    margin-right: -4px;
+}
+
+.drag-handle:active {
+    cursor: grabbing;
+    /* Handen stängs när man håller in */
+}
+
+/* Visuell effekt på kortet som håller på att flyttas */
+.exercise-card.dragging {
+    opacity: 0.95;
+    background-color: white;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    /* Kraftig skugga som visar att det svävar */
+    z-index: 100;
+    /* Ligger alltid ovanpå alla andra kort */
+
+    /* Stäng av animationen ENBART på kortet du drar, så att det följer fingret blixtsnabbt utan eftersläpning */
+    transition: none !important;
+}
+
+/* Den solida blå landningslinjen mellan korten */
+.drag-placeholder {
+    height: 4px;
+    background-color: var(--primary-blue);
+    border-radius: 2px;
+    margin: 4px 0;
+    box-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
+    animation: fadeInLine 0.15s ease forwards;
+}
+
+@keyframes fadeInLine {
+    from {
+        opacity: 0;
+        transform: scaleY(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+/* Kortet man drar på mobilen (Ingen blå/streckad ram, bara snygg skugga) */
+.exercise-card.dragging {
+    opacity: 0.95;
+    background-color: white;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    /* Svävande skugga */
+    transform: scale(1.02);
+    z-index: 100;
+}
+
+/* Rensat: När man drar på datorn syns inte heller någon streckad ram längre */
+.exercise-card.html5-dragging {
+    opacity: 0.4;
+}
+
+/* Drag-handtagets rörliga yta (gör den lite bredare för lättare touch-träff) */
+.drag-handle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 24px;
+    cursor: grab;
+    padding: 10px 4px 10px 0;
+    /* Mer touch-yta för tummen */
+    margin-right: -4px;
 }
