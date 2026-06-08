@@ -1,0 +1,374 @@
+:root {
+    --primary-blue: #2563eb;
+    --light-blue: #eff6ff;
+    --bg-gray: #f8fafc;
+    --border-gray: #e2e8f0;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-gray);
+    color: var(--text-dark);
+    /* Ändra från padding-bottom till dessa tre rader: */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Hindrar hela sidan från att skrolla */
+}
+
+/* Header */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: white;
+    border-bottom: 1px solid var(--border-gray);
+    flex-shrink: 0;
+    /* CRITICAL: Hindrar headern från att tryckas ihop */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.app-logo {
+    font-size: 1.5rem;
+}
+
+h1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+/* Knappar */
+.btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-secondary {
+    background: #f1f5f9;
+    color: var(--text-dark);
+}
+
+.btn-primary {
+    background: var(--primary-blue);
+    color: white;
+}
+
+/* Sökfält */
+.search-container {
+    padding: 12px 16px;
+    background-color: var(--bg-gray);
+    /* Matchar bakgrunden */
+    flex-shrink: 0;
+    /* Hindrar sökfältet från att krympa */
+}
+
+.search-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#search-input {
+    width: 100%;
+    padding: 12px;
+    padding-right: 40px;
+    /* Extra padding till höger så texten inte krockar med krysset */
+    border-radius: 8px;
+    border: 1px solid var(--border-gray);
+    background-color: #f1f5f9;
+    font-size: 1rem;
+    outline: none;
+}
+
+/* Styling för själva kryssknappen */
+.clear-btn {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 50%;
+    opacity: 0;
+    /* Gömd som standard */
+    pointer-events: none;
+    /* Gör att man inte kan klicka på den när den är osynlig */
+    transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+
+.clear-btn:hover {
+    background-color: var(--border-gray);
+    color: var(--text-dark);
+}
+
+/* Klass som läggs till via JS när det finns text */
+.clear-btn.show {
+    opacity: 1;
+    pointer-events: auto;
+    /* Gör den klickbar igen */
+}
+
+/* Övningslista & Kort */
+.exercise-list {
+    padding: 0 16px 20px 16px;
+    /* 20px extra padding i botten för snyggt avslut */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    /* Dessa rader flyttar skrollen hit: */
+    flex-grow: 1;
+    overflow-y: auto;
+    /* Aktiverar skrollning enbart nedåt */
+    -webkit-overflow-scrolling: touch;
+    /* Gör skrollningen mjuk på iPhones */
+}
+
+.exercise-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    /* Låter .instructions-text hamna underst */
+    border: 1px solid var(--border-gray);
+    position: relative;
+    /* Ta bort gap och align-items härifrån då det styrs på raden istället */
+}
+
+.exercise-main-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    /* Tar upp hela bredden på kortet */
+    flex-wrap: nowrap;
+    /* CRITICAL: Den här raden får ALDRIG brytas! */
+}
+
+/* Redigeringsläge-styling (Blå ram när vald) */
+.exercise-card.editing.selected {
+    border-color: var(--primary-blue);
+}
+
+.exercise-img {
+    width: 110px;
+    height: 60px;
+    object-fit: fill;
+    border-radius: 6px;
+    background-color: #fff;
+    flex-shrink: 0;
+    /* Hindrar bilden från att krympa */
+}
+
+.exercise-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    /* Tillåter texten inuti att radbrytas direkt vid trångt utrymme */
+}
+
+.exercise-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    word-break: break-word;
+    /* Radbryter långa ord om det behövs */
+    overflow-wrap: break-word;
+}
+
+/* Vikt-element */
+.weight-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    /* Ökad från 0.9rem */
+    color: var(--text-dark);
+    margin-top: 4px;
+}
+
+.weight-badge {
+    background-color: var(--light-blue);
+    color: var(--primary-blue);
+    padding: 6px 14px;
+    /* Lite mer padding för den större texten */
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 1.1rem;
+    /* Ökad så att själva vikten blir tydlig */
+}
+
+.weight-input {
+    width: 70px;
+    padding: 4px 6px;
+    border: 1px solid var(--primary-blue);
+    border-radius: 6px;
+    font-weight: 600;
+    color: var(--primary-blue);
+}
+
+/* Expandera-instruktioner */
+.toggle-instructions {
+    color: var(--primary-blue);
+    font-size: 1.05rem;
+    /* Ökad från 0.85rem */
+    font-weight: 400;
+    cursor: pointer;
+    margin-top: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    /* Avstånd mellan texten och SVG-pilen */
+}
+
+/* SVG Ikonen */
+.chevron-icon {
+    transition: transform 0.2s ease;
+    /* Gör så att rotationen blir mjuk */
+    display: inline-block;
+    margin-top: 2px;
+}
+
+/* När instruktionerna är öppna roterar vi pilen 180 grader så den pekar uppåt */
+.chevron-icon.rotate {
+    transform: rotate(180deg);
+}
+
+.instructions-text {
+    display: none;
+    width: 100%;
+    margin-top: 12px;
+    padding-top: 16px;
+    border-top: 1px solid #f1f5f9;
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.instructions-text strong {
+    display: block;
+    color: var(--text-dark);
+    font-size: 1.1rem;
+}
+
+.instructions-text.open {
+    display: block;
+}
+
+/* Kryssruta för redigering */
+.checkbox-container {
+    display: none;
+    align-items: center;
+    margin-right: 8px;
+}
+
+/* Visuell feedback när man håller musen över eller trycker på kortet i edit-läge */
+.exercise-card.editing {
+    cursor: pointer;
+    transition: transform 0.1s ease, border-color 0.15s ease;
+}
+
+.exercise-card.editing:active {
+    transform: scale(0.98);
+    /* Kortet "trycks in" lite grann när man klickar på det */
+}
+
+/* Gör att kryssrutan inte blockerar klicket (muspekaren går igenom) */
+.status-checkbox {
+    cursor: pointer;
+}
+
+.exercise-card.editing .checkbox-container {
+    display: flex;
+}
+
+.exercise-card.editing .weight-container,
+.exercise-card.editing .toggle-instructions {
+    display: none;
+}
+
+/* Göm vikt/instruktioner i edit-läge */
+
+/* Bottenmeny */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background: white;
+    border-top: 1px solid var(--border-gray);
+    display: flex;
+    justify-space: around;
+    align-items: center;
+    flex-shrink: 0;
+    /* CRITICAL: Hindrar footern från att tryckas ihop */
+    z-index: 10;
+    /* Läggs till så footern alltid ligger överst */
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+/* Ikonen i headern */
+.header-icon {
+    font-size: 28px;
+    /* Styr storleken med font-size */
+    color: var(--text-dark);
+    display: inline-block;
+}
+
+/* Säkra att ikonerna får behålla sitt eget typsnitt och inte skrivs över av * */
+.mdi,
+.mdi::before {
+    font-family: "Material Design Icons" !important;
+}
+
+.nav-icon-font {
+    font-size: 24px;
+    color: var(--text-muted);
+    /* Standardfärg (grå) */
+    margin-bottom: 4px;
+    transition: color 0.15s ease;
+    display: inline-block;
+}
+
+/* Gör att ikonen blir blå när fliken är aktiv */
+.nav-item.active .nav-icon-font {
+    color: var(--primary-blue);
+}

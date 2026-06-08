@@ -1,0 +1,205 @@
+[
+  {
+    "title": "Utfall framåt",
+    "weight": 0,
+    "visible": true,
+    "image": "images/utfall-framat.png",
+    "instructions": "Utfall framåt. Set: 3, Repetitioner: 10."
+  },
+  {
+    "title": "Enbensknäböj på balanskudde",
+    "weight": 0,
+    "visible": true,
+    "image": "images/enbensknaboj-pa-balanskudde.png",
+    "instructions": "Stå på balanskudden och håll balansen. Lyft det ena benet och sänk överkroppen så långt du kan genom att böja knät. Ha rak rygg och blicken riktad rakt fram. Upprepa övningen med det andra benet. Set: 3, Repetitioner: 5."
+  },
+  {
+    "title": "Draken",
+    "weight": 0,
+    "visible": true,
+    "image": "images/draken.png",
+    "instructions": "Stå upprest med en höftbredds avstånd mellan fötterna. Håll en viktskiva med raka armar framför kroppen. Bli stående på ett ben med lätt böj i knät medan du tippar överkroppen framåt. Motsatt ben ska vara rakt och en förlängning av överkroppen. Returnera till utgångsposition på repetera. Set: 3, Repetitioner: 5."
+  },
+  {
+    "title": "Tåhäv på step",
+    "weight": 0,
+    "visible": true,
+    "image": "images/tahav-pa-step.png",
+    "instructions": "Stå på kanten av en step, ett trappsteg eller en bänk, så att hälarna hänger i luften. Ha ungefär höftbrett avstånd mellan fötterna. Lyft hälarna och pressa upp dich till tåstående. Sänk ner igen och upprepa. Övningen kan göras med eller utan stöd. Gör med böjt och sträckt kné. Set: 3, Repetitioner: 20."
+  },
+  {
+    "title": "Ryggliggande/ sittande släpcykling",
+    "weight": 0,
+    "visible": true,
+    "image": "images/ryggliggande-sittande-slapcykling.png",
+    "instructions": "Ryggliggande/ sittande släpcykling. Set: 3, Repetitioner: 20."
+  },
+  {
+    "title": "Sittande tå- och hällyft",
+    "weight": 0,
+    "visible": true,
+    "image": "images/sittande-ta-och-hallyft.png",
+    "instructions": "Sitt med båda fötterna på golvet. Rulla fram på tårna och lyft hälarna från golvet växelvis. Set: 3, Repetitioner: 20."
+  },
+  {
+    "title": "Sittande Tåhäv m. boll mellan fötterna",
+    "weight": 0,
+    "visible": true,
+    "image": "images/sittande-tahav-m-boll-mellan-fotterna.png",
+    "instructions": "Sätt dig med en boll placerad mellan hälarna. Tryck hälarna mot bollen samtidigt som du reser dig upp på tårna. Sänk dig kontrollerat ner. Set: 3, Repetitioner: 10."
+  },
+  {
+    "title": "Tåhäv med boll",
+    "weight": 0,
+    "visible": true,
+    "image": "images/tahav-med-boll.png",
+    "instructions": "Stå med lätt böjda knän. Pressa dig upp till tåstående och sänk tillbaka. Set: 3, Repetitioner: 10-20."
+  },
+  {
+    "title": "Sittande inversion av vrist med band",
+    "weight": 0,
+    "visible": true,
+    "image": "images/sittande-inversion-av-vrist-med-band.png",
+    "instructions": "Sätt fast bandet i höjd med vristen och sitt med raka ben på en matta med den aktiva sidan vänd mot fästpunkten. Med bandet fäst runt foten på insidan vrids vristen inåt i en kontrollerad rörelse. Återgå sakta till utgångsställningen och upprepa. Set: 3, Repetitioner: 15-20."
+  },
+  {
+    "title": "Sittande eversion av vrist med band",
+    "weight": 0,
+    "visible": true,
+    "image": "images/sittande-eversion-av-vrist-med-band.png",
+    "instructions": "Fäst bandet i höjd med vristen och sitt med raka ben på en matta med den aktiva sidan bortvänd från fästpunkten. Dra upp motsatt ben för ett ge plats åt bandet. Med bandet fäst runt foten på utsidan, vrids vristen utåt i en kontrollerad rörelse. Återgå sakta till utgångsställningen och upprepa. Set: 3, Repetitioner: 15-20."
+  },
+  {
+    "title": "Cykel",
+    "weight": 0,
+    "visible": true,
+    "image": "images/cykel.png",
+    "instructions": "Cykel. Varaktighet: 30 min 0 sek."
+  },
+  {
+    "title": "Stående lyft åt sidan m/hantlar",
+    "weight": 0,
+    "visible": true,
+    "image": "images/staende-lyft-at-sidan-m-hantlar.png",
+    "instructions": "Tänk på stance. Spänn bål/säte. Raka armbågar. Lyft rakt ut i sidled. Stå med rak rygg, böjda armbågar och hantlarna framför kroppen. Lyft armarna uppåt och utåt i en cirkulär rörelse utan att höja axlarna. I toppläget är lillfingersidan av handen riktad mot taket. Vänd rörelsen när armbågarna och händerna är i höjd med axeln. Set: 3, Repetitioner: 10."
+  },
+  {
+    "title": "Facepulls m/kabel från hög höjd",
+    "weight": 0,
+    "visible": true,
+    "image": "images/facepulls-m-kabel-fran-hog-hojd.png",
+    "instructions": "Spänn bål/säte. Stå med raka armar och håll repet i ett smalt grepp i ansiktshöjd. Luta dig lätt bakåt och böj knäna något. Dra repet mot ansiktet medan du för armbågarna ut åt sidan och drar ihop skulderbladen. Undvik att lyfta axlarna. Släpp långsamt tillbaka igen och upprepa. Set: 3, Repetitioner: 10."
+  },
+  {
+    "title": "Sittande rodd m/kabel",
+    "weight": 0,
+    "visible": true,
+    "image": "images/sittande-rodd-m-kabel.png",
+    "instructions": "Svanka ej. Sitt med rak rygg, lätt böjda knän och axlarna framåtdragna. För axlarna tillbaka och dra handtaget mot magen, samtidigt som du pressar fram bröstkorgen. Knip ihop skulderbladen vid slutpositionen. Återgå långsamt till startpositionen. Set: 3, Repetitioner: 10."
+  },
+  {
+    "title": "Latsdrag till bröst (Raka armar)",
+    "weight": 0,
+    "visible": true,
+    "image": "images/latsdrag-till-brost.png",
+    "instructions": "OBS! Raka armar. Sänk och höj skuldrorna. Ta ett brett grepp om stången, luta dig lite bakåt och håll blicken riktad snett uppåt. Spänn bålen. Sänk skuldrorna utan att armbågarna böjs. Höj igen. Set: 3, Repetitioner: 10."
+  },
+  {
+    "title": "Latsdrag i kabel",
+    "weight": 0,
+    "visible": true,
+    "image": "images/latsdrag-i-kabel.png",
+    "instructions": "Spänn bål. Undvik svank. Sänk skuldrorna innan du drar. Placera fästet för kabeln i toppen, fatta tag om handtagen och sätt dig på knä i mitten. Spänn mage och bibehåll spänningen. Sänk skulderblad och dra handtag in mot kroppen. Set: 3, Repetitioner: 10."
+  },
+  {
+    "title": "Lat pull down i kabel",
+    "weight": 0,
+    "visible": true,
+    "image": "images/lat-pull-down-i-kabel.png",
+    "instructions": "Sänk och dra ihop skuldrorna innan draget påbörjas. Raka armbågar. Fäst en stång i en kabelmaskin. Ställ dig med lätt böjda knän och böjda höfter. Svanka. Håll händerna ovanpå stången med öppna händer. Tryck ned stången till låren med raka armar. Känn hur nedre delen av bröstryggen/ländryggen arbetar. Set: 3, Repetitioner: 10."
+  },
+  {
+    "title": "Stående flyes m/kabel",
+    "weight": 0,
+    "visible": true,
+    "image": "images/staende-flyes-m-kabel.png",
+    "instructions": "Spänn bål och säte. Undvik svank. Stå med rak rygg, pressa fram bröstet och håll armarna ut åt sidan. Ha armbågarna lätt böjda och stå med den ena foten framför den andra. Pressa fram armarna framför kroppen tills de är i brösthöjd, och lillfingrarna möter varandra. Släpp långsamt tillbaka och upprepa. Set: 3, Repetitioner: 10."
+  },
+  {
+    "title": "Benpress",
+    "weight": 0,
+    "visible": true,
+    "image": "images/benpress.png",
+    "instructions": "Fötter relativt högt och något bredare. Placera fötterna på fotplattan med axelbrett avstånd. Böj knäna i ca. 90 grader. Spänn mage och korsryggsregionen. Pressa benen mot fotplattan, tills knäna är nästan helt utsträckta. Återgå till startposition och upprepa. Set: 3, Repetitioner: 10."
+  },
+  {
+    "title": "Hip thrust på bänk m/viktstång eller i maskin",
+    "weight": 0,
+    "visible": true,
+    "image": "images/hip-thrust-pa-bank.png",
+    "instructions": "Placera skulderpartiet på en bänk, behåll fötter och sätet i golvet med böjda knän. Placera en viktstång över höften, sträck höften ut och spänn sätesmuskulaturen. Sänk sätet ner mot golvet igen. Set: 3, Repetitioner: 10."
+  },
+  {
+    "title": "Utsida höft i maskin",
+    "weight": 0,
+    "visible": true,
+    "image": "images/utsida-hoft-i-maskin.png",
+    "instructions": "Se till att ha bra stöd för korsryggen och fixera överkroppen med hjälp av handtagen. Pressa benen ut åt sidan och för dem långsamt tillbaka igen. Set: 3, Repetitioner: 10."
+  },
+  {
+    "title": "Marklyft m. en kettlebell",
+    "weight": 0,
+    "visible": true,
+    "image": "images/marklyft-m-en-kettlebell.png",
+    "instructions": "Håll en kettlebell med båda händer. Böj i knä och höft. Dra tillbaka skuldrorna, bröstet upp något och fram. Spänn mag- och sätesmuskler. Med tryck i hälarna lyft upp vikten med raka armar genom att föra fram höften. Kom tillbaka till utgångsställning och upprepa."
+  },
+  {
+    "title": "Cybex: Row 3",
+    "weight": 0,
+    "visible": true,
+    "image": "images/cybex-row-3.png",
+    "instructions": "Sitt med rak rygg och pressa bröstet mot dynan. Ta tag i de lodräta handtagen. Håll armarna raka och släpp fram axlarna. Dra bak axlarna samtidigt som du drar handtagen bakåt mot magregionen. Pressa samman skulderbladen i slutläget och ha kontakt med bröstdynan under hela rörelsen."
+  },
+  {
+    "title": "Knäböj med hantlar",
+    "weight": 0,
+    "visible": true,
+    "image": "images/knaboj-med-hantlar.png",
+    "instructions": "Stå med en höftbredds avstånd mellan fötterna och en hantel i varje hand. Böj nedåt till ca 90 graders vinkel i knäna och kom upp till utgångspositionen igen. Håll ryggen rak under hela övningen."
+  },
+  {
+    "title": "Knäböj med viktsäck på axlarna",
+    "weight": 0,
+    "visible": true,
+    "image": "images/knaboj-med-viktsack-pa-axlarna.png",
+    "instructions": "Ställ dig med en stock/viktsäck vilande på axlarna. Fötterna är placerade i axelbrett avstånd och pekar framåt och något utåt. Böj ner till ca 90 grader i knäna och tryck upp igen. Håll ryggen neutral och blicken fram och upp."
+  },
+  {
+    "title": "TRX Lean Back Squat",
+    "weight": 0,
+    "visible": true,
+    "image": "images/trx-lean-back-squat.png",
+    "instructions": "Stå på golvet med en axellängds avstånd mellan fötterna, händerna i TRX och armbågarna rakt under axlarna. Sänk sätet i golvet, sträck ut armbågarna och pressa tillbaka till utgångspositionen med hälen."
+  },
+  {
+    "title": "LF: Latsdrag 1",
+    "weight": 0,
+    "visible": true,
+    "image": "images/lf-latsdrag-1.png",
+    "instructions": "Sitt rak i ryggen, pressa fram bröstet och dra handtagen nedåt tills de är i axelhöjd. Släpp kontrollerat upp igen."
+  },
+  {
+    "title": "Bröstpress 1",
+    "weight": 0,
+    "visible": true,
+    "image": "images/brostpress-1.png",
+    "instructions": "Sitt med avslappnade axlar och fatta ett bra grepp om handtagen. Armbågarna ska vara i höjd med händerna. Pressa fram handtagen tills armarna är raka, och för långsamt tillbaka mot bröstet."
+  },
+  {
+    "title": "Stående hantelcurl",
+    "weight": 0,
+    "visible": true,
+    "image": "images/staende-hantelcurl.png",
+    "instructions": "Låt hantlarna hänga ned åt sidan med handflatorna vända in mot kroppen. Lyft hantlarna genom att böja i armbågsleden samtidigt som du vrider dem utåt. Håll handlederna raka under hela rörelsen. Sänk långsamt tillbaka till startpositionen och upprepa."
+  }
+]
